@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home.tsx";
+import Root from "./pages/Root.tsx";
 
 const router = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/coin/:id", element: <div>Coin details</div> },
+  {
+    path: "/",
+    element: <Root />,
+  },
 ]);
 
 function App() {
