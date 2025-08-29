@@ -16,10 +16,18 @@ export const useCoins = (searchTerm: string) => {
     isLoading: isLoadingMarkets,
     isError: isMarketsError,
     error: marketsError,
+    refetch,
   } = useQuery({
     queryKey: ["markets", searchTerm, searchIds],
-    queryFn: () =>
-      fetchMarkets(searchIds && searchIds.length > 0 ? searchIds : undefined),
+    queryFn: () => {
+      if (searchTerm && searchResults?.length === 0) {
+        return Promise.resolve([]);
+      }
+
+      return fetchMarkets(
+        searchIds && searchIds.length > 0 ? searchIds : undefined
+      );
+    },
     enabled: Boolean(
       !isSearching && (!searchTerm || (searchTerm && !!searchIds))
     ),
@@ -30,5 +38,6 @@ export const useCoins = (searchTerm: string) => {
     isError: isMarketsError,
     isLoading: isSearching || isLoadingMarkets,
     error: marketsError,
+    refetch,
   };
 };
