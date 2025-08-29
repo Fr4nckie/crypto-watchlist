@@ -44,7 +44,10 @@ const CryptoTableRow = ({ index, coin }: CryptoTableRowProps) => {
           price_change_percentage_24h > 0 ? "text-green-500" : "text-red-500"
         }`}
       >
-        {price_change_percentage_24h.toFixed(2)}%
+        {price_change_percentage_24h
+          ? price_change_percentage_24h.toFixed(2)
+          : 0}
+        %
       </TableCell>
       <TableCell className="md:w-40 md:text-right">
         {formatMarketCap(market_cap)}
