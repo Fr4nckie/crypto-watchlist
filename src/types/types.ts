@@ -40,3 +40,12 @@ export type CoinByQuery = {
   thumb: string;
   large: string;
 };
+
+export type MarketsParams = {
+  vs_currency: string;
+  order?: string;
+  per_page?: number;
+  page?: number;
+  sparkline?: boolean;
+  ids?: string;
+};
