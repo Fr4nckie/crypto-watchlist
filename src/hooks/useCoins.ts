@@ -11,6 +11,9 @@ export const useCoins = (searchTerm: string) => {
 
   const searchIds = searchResults?.map((coin) => coin.id);
 
+  const hasSearchedWithNoResults =
+    !!searchTerm && !isSearching && searchResults?.length === 0;
+
   const {
     data: markets,
     isLoading: isLoadingMarkets,
@@ -20,23 +23,20 @@ export const useCoins = (searchTerm: string) => {
   } = useQuery({
     queryKey: ["markets", searchTerm, searchIds],
     queryFn: () => {
-      if (searchTerm && searchResults?.length === 0) {
-        return Promise.resolve([]);
+      if (hasSearchedWithNoResults) {
+        return [];
       }
 
-      return fetchMarkets(
-        searchIds && searchIds.length > 0 ? searchIds : undefined
-      );
+      return fetchMarkets(searchIds);
     },
-    enabled: Boolean(
-      !isSearching && (!searchTerm || (searchTerm && !!searchIds))
-    ),
+
+    enabled: !searchTerm || !isSearching,
   });
 
   return {
     coins: markets ?? [],
     isError: isMarketsError,
-    isLoading: isSearching || isLoadingMarkets,
+    isLoading: isLoadingMarkets || isSearching,
     error: marketsError,
     refetch,
   };
