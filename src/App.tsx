@@ -1,10 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./pages/Root.tsx";
+import CoinDetail from "./pages/CoinDetail.tsx";
+import Home from "./pages/Home.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Home />,
+  },
+  {
+    path: "/:id",
+    element: <CoinDetail />,
   },
 ]);
 
