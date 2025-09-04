@@ -77,7 +77,7 @@ const CoinDetail = (): ReactNode => {
 
   return (
     <div className="container mx-auto px-4 py-4 w-full min-h-screen flex flex-col">
-      <Button className="w-fit" onClick={() => navigate(-1)}>
+      <Button className="w-fit cursor-pointer" onClick={() => navigate(-1)}>
         <ArrowLeft /> Back
       </Button>
       <div className="flex-1 flex flex-col justify-center mt-6 md:mt-0">
