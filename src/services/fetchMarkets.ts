@@ -16,7 +16,6 @@ export const fetchMarkets = async (ids?: string[]): Promise<Coin[] | null> => {
 
   try {
     const { data } = await coinApi.get("/coins/markets", { params });
-    console.log(data);
 
     return data;
   } catch (error) {
