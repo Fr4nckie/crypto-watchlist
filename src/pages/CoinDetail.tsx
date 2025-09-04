@@ -6,7 +6,7 @@ import Spinner from "@/components/Spinner.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { useCoinDetail } from "@/hooks/useCoinDetail.ts";
 import { ArrowLeft } from "lucide-react";
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const CoinDetail = (): ReactNode => {
@@ -20,6 +20,16 @@ const CoinDetail = (): ReactNode => {
     error,
     refetch,
   } = useCoinDetail(id as string);
+
+  useEffect(() => {
+    document.title = coin
+      ? `${coin.name} (${coin.symbol.toUpperCase()}) - CryptoWatchlist`
+      : "Loading... - CryptoWatchlist";
+
+    return () => {
+      document.title = "CryptoWatchlist";
+    };
+  }, [coin]);
 
   if (!id) {
     return (
