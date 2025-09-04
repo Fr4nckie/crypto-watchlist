@@ -1,20 +1,18 @@
 import { AlertCircleIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert.tsx";
-import { Button } from "./ui/button.tsx";
+import type { ReactNode } from "react";
 
 type ErrorElementProps = {
   message: string;
-  refetch: () => void;
+  children?: ReactNode;
 };
 
-const ErrorElement = ({ message, refetch }: ErrorElementProps) => {
+const ErrorElement = ({ message, children }: ErrorElementProps) => {
   return (
     <Alert variant={"destructive"} className="w-fit">
       <AlertCircleIcon />
       <AlertTitle>{message}</AlertTitle>
-      <AlertDescription className="mt-2">
-        <Button onClick={refetch} variant={"destructive"} size={"sm"} className="w-full">Reload</Button>
-      </AlertDescription>
+      {children && <AlertDescription>{children}</AlertDescription>}
     </Alert>
   );
 };
