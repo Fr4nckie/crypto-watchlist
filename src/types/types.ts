@@ -49,3 +49,31 @@ export type MarketsParams = {
   sparkline?: boolean;
   ids?: string;
 };
+
+export type MarketData = {
+  current_price: Record<string, number>;
+  market_cap: Record<string, number>;
+  total_volume: Record<string, number>;
+  price_change_percentage_24h: number;
+  market_cap_change_24h: number;
+  high_24h: Record<string, number>;
+  low_24h: Record<string, number>;
+  circulating_supply: number;
+  total_supply: number;
+  sparkline_7d: { price: number[] };
+};
+
+export type CoinDetailLite = {
+  id: string;
+  symbol: string;
+  name: string;
+  market_cap_rank: number;
+  market_data: MarketData;
+  image: { thumb: string; small: string; large: string };
+};
+
+export interface FormattedPoint {
+  index: number;
+  value: number;
+  raw: number;
+}
